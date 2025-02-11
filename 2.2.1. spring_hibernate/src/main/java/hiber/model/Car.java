@@ -7,9 +7,13 @@ import java.util.Objects;
 @Table(name = "Cars")
 public class Car {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long car_id;
+
     @Column(name = "model")
     private String model;
-    @Id
+
     @Column(name = "series")
     private int series;
 
@@ -22,6 +26,10 @@ public class Car {
         this.model = model;
         this.series = series;
     }
+
+    public long getId() { return car_id; }
+
+    public void setId(long car_id) { this.car_id = car_id; }
 
     public String getModel() {
         return model;
@@ -44,12 +52,12 @@ public class Car {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         Car car = (Car) object;
-        return series == car.series && Objects.equals(model, car.model) && Objects.equals(vladelec, car.vladelec);
+        return car_id == car.car_id && series == car.series && Objects.equals(model, car.model) && Objects.equals(vladelec, car.vladelec);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(model, series, vladelec);
+        return Objects.hash(car_id, model, series, vladelec);
     }
 
     @Override
